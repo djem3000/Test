@@ -16,13 +16,24 @@ namespace WebAPI
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Filename=App.db"));
             builder.Services.AddAuthorization();
-            builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+            builder.Services.AddIdentityApiEndpoints<IdentityUserExt>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            //builder.Services.AddIdentity<IdentityUserExt, IdentityRole>()
-            //   .AddRoles<IdentityRole>()
-            //  .AddEntityFrameworkStores<AppDbContext>();
-            
+            builder.Services.AddIdentityCore<IdentityUserExt>()
+              .AddRoles<IdentityRole>()
+              .AddEntityFrameworkStores<AppDbContext>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllHeaders",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -45,24 +56,27 @@ namespace WebAPI
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapIdentityApi<IdentityUser>();
+            //app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors("AllowAllHeaders");
+
+            app.MapIdentityApi<IdentityUserExt>();
             app.MapControllers();
 
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    var services = scope.ServiceProvider;
-            //    try
-            //    {
-            //        var userManager = services.GetRequiredService<UserManager<IdentityUserExt>>();
-            //        var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-            //        await DataInitializer.InitializeAsync(userManager, rolesManager);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        var logger = services.GetRequiredService<ILogger<Program>>();
-            //        logger.LogError(ex, "An error occurred while seeding the database.");
-            //    }
-            //}
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var userManager = services.GetRequiredService<UserManager<IdentityUserExt>>();
+                    var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await DataInitializer.InitializeAsync(userManager, rolesManager);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while seeding the database.");
+                }
+            }
 
             app.Run();
         }

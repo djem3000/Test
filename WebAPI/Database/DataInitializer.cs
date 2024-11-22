@@ -10,19 +10,19 @@ namespace WebAPI.Database
             string password = "_Aa123456";
             if (await roleManager.FindByNameAsync("admin") == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("admin"));
+                await roleManager.CreateAsync(new IdentityRole("admin") { Id = "1" });
             }
             if (await roleManager.FindByNameAsync("user") == null)
             {
-                await roleManager.CreateAsync(new IdentityRole("user"));
+                await roleManager.CreateAsync(new IdentityRole("user") { Id = "2"});
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
                 var admin = new IdentityUserExt { Email = adminEmail, UserName = adminEmail, Image = System.Convert.FromBase64String(Image) };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(admin, "admin");
+                {                    
+                    result = await userManager.AddToRoleAsync(admin, "admin");
                 }
             }
         }

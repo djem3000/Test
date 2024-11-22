@@ -1,0 +1,51 @@
+/* Простой стиль для контейнера формы логина */
+.login-container {
+    max-width: 400px; /* Максимальная ширина формы */
+    margin: 0 auto; /* Центрирование формы */
+    padding: 20px; /* Внутренние отступы */
+    border: 1px solid #ddd; /* Цвет границы */
+    border-radius: 8px; /* Скругление углов */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень для создания эффекта поднятости */
+    background-color: #f8f9fa; /* Цвет фона */
+}
+
+    /* Заголовок формы */
+    .login-container h2 {
+        text-align: center; /* Центрирование заголовка */
+        color: #333; /* Цвет заголовка */
+    }
+
+    /* Поля ввода */
+    .login-container input[type="email"],
+    .login-container input[type="password"] {
+        width: 100%; /* Ширина 100% от родительского контейнера */
+        padding: 10px; /* Внутренние отступы */
+        margin: 10px 0; /* Отступы сверху и снизу */
+        border: 1px solid #ccc; /* Цвет границы */
+        border-radius: 4px; /* Скругление углов */
+        box-sizing: border-box; /* Учёт границы и отступов в заданной ширине */
+    }
+
+    /* Кнопка отправки */
+    .login-container button {
+        width: 100%; /* Ширина 100% от родительского контейнера */
+        padding: 10px; /* Внутренние отступы */
+        margin-top: 10px; /* Отступ сверху */
+        border: none; /* Убираем границу */
+        border-radius: 4px; /* Скругление углов */
+        background-color: #007bff; /* Цвет фона кнопки */
+        color: white; /* Цвет текста кнопки */
+        cursor: pointer; /* Указатель при наведении */
+        font-size: 16px; /* Размер шрифта */
+    }
+
+        /* Эффект при наведении на кнопку */
+        .login-container button:hover {
+            background-color: #0056b3; /* Более темный цвет при наведении */
+        }
+
+    /* Сообщение об ошибке */
+    .login-container .error {
+        color: red; /* Красный цвет текста для сообщений об ошибке */
+        font-size: 14px; /* Размер шрифта сообщения */
+    }

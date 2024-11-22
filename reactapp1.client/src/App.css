@@ -5,7 +5,37 @@
     text-align: center;
 }
 
+.avatar {
+    height: 32px;
+}
+
 th, td {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+
+nav {
+    background-color: #f8f9fa; /* Цвет фона для навигации */
+    padding: 10px; /* Внутренние отступы */
+}
+
+    nav ul {
+        list-style-type: none; /* Убираем маркеры списка */
+        padding: 0; /* Убираем отступы */
+        margin: 0; /* Убираем наружные отступы */
+        display: flex; /* Используем flex для горизонтального отображения */
+    }
+
+        nav ul li {
+            margin-right: 20px; /* Отступ между элементами меню */
+        }
+
+            nav ul li a {
+                text-decoration: none; /* Убираем подчеркивание у ссылок */
+                color: #007bff; /* Цвет ссылок */
+            }
+
+                nav ul li a:hover {
+                    text-decoration: underline; /* Подчеркивание при наведении */
+                }
