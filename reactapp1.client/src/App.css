@@ -9,9 +9,36 @@
     height: 32px;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
 th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
 
@@ -39,3 +66,8 @@ nav {
                 nav ul li a:hover {
                     text-decoration: underline; /* Подчеркивание при наведении */
                 }
+
+.clickable:hover{
+    cursor: pointer;
+    background-color: lightgray;
+}

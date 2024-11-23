@@ -7,7 +7,12 @@ namespace WebAPI.Database
         public static async Task InitializeAsync(UserManager<IdentityUserExt> userManager, RoleManager<IdentityRole> roleManager)
         {
             string adminEmail = "admin@test.com";
-            string password = "_Aa123456";
+            string adminPassword = "_Aa123456";
+
+            string user1Email = "viktor@test.com";
+            string user1Password = "_Aa123456";
+
+
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("admin") { Id = "1" });
@@ -19,10 +24,17 @@ namespace WebAPI.Database
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
                 var admin = new IdentityUserExt { Email = adminEmail, UserName = adminEmail, Image = System.Convert.FromBase64String(Image) };
-                IdentityResult result = await userManager.CreateAsync(admin, password);
+                IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                 {                    
                     result = await userManager.AddToRoleAsync(admin, "admin");
+                }
+
+                var user1 = new IdentityUserExt { Email = user1Email, UserName = user1Email };
+                result = await userManager.CreateAsync(user1, user1Password);
+                if (result.Succeeded)
+                {
+                    result = await userManager.AddToRoleAsync(user1, "user");
                 }
             }
         }

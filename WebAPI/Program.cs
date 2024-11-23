@@ -1,8 +1,5 @@
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using WebAPI.Database;
 
 namespace WebAPI
@@ -11,18 +8,21 @@ namespace WebAPI
     {
         public static async Task Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args);            
 
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Filename=App.db"));
             builder.Services.AddAuthorization();
             builder.Services.AddIdentityApiEndpoints<IdentityUserExt>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services.AddIdentityCore<IdentityUserExt>()
               .AddRoles<IdentityRole>()
               .AddEntityFrameworkStores<AppDbContext>();
+
+            builder.Services.AddScoped<IUserClaimsPrincipalFactory<IdentityUserExt>, CustomClaimsPrincipalFactory>();
 
             builder.Services.AddCors(options =>
             {
@@ -53,11 +53,10 @@ namespace WebAPI
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            //app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseCors("AllowAllHeaders");
+
+            app.UseAuthentication();
+            app.UseAuthorization();                       
 
             app.MapIdentityApi<IdentityUserExt>();
             app.MapControllers();
