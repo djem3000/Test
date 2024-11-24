@@ -8,6 +8,7 @@ import Profile from "./profile";
 import Login from "./login";
 import Logout from "./logout";
 import IdentityService from "./services/IdentityService"
+import TemperatureChart from './TemperatureChart';
 
 function App() {
     const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -34,6 +35,9 @@ function App() {
                             <Link to="/profile">Profile</Link>
                         </li>
                         <li>
+                            <Link to="/chart">Weather Chart</Link>
+                        </li>
+                        <li>
                             <Link to="/logout">Logout</Link>
                         </li>
                     </ul>
@@ -45,6 +49,7 @@ function App() {
                 <Route path="/profile/:id" element={<Profile />} />                
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/chart" element={<TemperatureChart />} />
             </Routes>
         </Router>
     );

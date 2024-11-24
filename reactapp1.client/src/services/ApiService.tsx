@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { Identity } from "../dto";
+import { ChartDTO, Identity } from "../dto";
 import IdentityService from "./IdentityService";
 
 const api: AxiosInstance = axios.create({
@@ -133,5 +133,10 @@ export const updateAvatar = async (file: File) => {
 
 export const getRoles = async () => {
     const response = await api.get(`/roles`);
+    return response.data;
+};
+
+export const getTemperatures = async (year?: number): Promise<ChartDTO> => {
+    const response = await api.get<ChartDTO>(`/TemperatureHistory/${(year == undefined ? '' : year)}`);
     return response.data;
 };

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Security.Claims;
-using WebAPI.Database;
+using WebAPI.Serurity;
 
 namespace WebAPI.Controllers
 {

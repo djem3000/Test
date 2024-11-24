@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using WebAPI.Serurity;
 
 namespace WebAPI.Database
 {

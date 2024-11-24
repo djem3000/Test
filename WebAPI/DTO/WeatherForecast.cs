@@ -1,4 +1,4 @@
-namespace WebAPI
+namespace WebAPI.DTO
 {
     public class WeatherForecast
     {
