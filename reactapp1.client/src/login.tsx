@@ -92,9 +92,7 @@ function Login() {
             window.location.reload(); 
         }
         catch (ex: any) {
-            const err = Object.values(ex.response.data.errors).reduce((accumulator, currentValue) => {
-                return accumulator.concat(currentValue);
-            }, []);;
+            const err = Object.values(ex.response.data.errors).flatMap(x=>x);
             setErrors(err as string[]);
         }
     }

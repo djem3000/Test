@@ -8,7 +8,8 @@ import Profile from "./profile";
 import Login from "./login";
 import Logout from "./logout";
 import IdentityService from "./services/IdentityService"
-import TemperatureChart from "./TemperatureChart"
+import TemperatureChart from './temperatureChart';
+
 
 function App() {
     const [isAuth, setIsAuth] = useState<boolean>(false);

@@ -1,0 +1,12 @@
+version: "3.8"
+services:  
+   web-api:
+    image: djem3000/test-webapi:latest    
+    ports:
+      - "8090:8080"
+      - "8091:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+               
+      
