@@ -31,7 +31,7 @@ function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                </div>
+                </div>                
                 <div>
                     <label>Password:</label>
                     <input
@@ -53,7 +53,9 @@ function Login() {
                     </div>
                 }
 
-                <button type="submit">Sign in</button>  
+                {!isSignUp &&
+                    <button type="submit">Sign in</button>
+                }
                 
                 <button type="button" onClick={()=>onSignUp()}>Sign up</button>
                 {errors.map(error => <p className="error">{error}</p>)}                

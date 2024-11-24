@@ -8,7 +8,7 @@ import Profile from "./profile";
 import Login from "./login";
 import Logout from "./logout";
 import IdentityService from "./services/IdentityService"
-import TemperatureChart from './TemperatureChart';
+import TemperatureChart from "./TemperatureChart"
 
 function App() {
     const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -18,6 +18,7 @@ function App() {
 
     useEffect(() => {          
         IdentityService.onChangedAdd(handleIdentityChange);
+        setIsAuth(IdentityService.isAuthenticated());
         return () => {
             IdentityService.onChangedRemove(handleIdentityChange);
         }  
@@ -32,7 +33,7 @@ function App() {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/profile">Profile</Link>
+                            <Link to="/profile" reloadDocument>My Profile</Link>
                         </li>
                         <li>
                             <Link to="/chart">Weather Chart</Link>

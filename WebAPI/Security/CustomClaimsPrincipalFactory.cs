@@ -14,7 +14,7 @@ public class CustomClaimsPrincipalFactory : UserClaimsPrincipalFactory<IdentityU
         var principal = await base.CreateAsync(user);
 
         // update login info
-        user.LoginCount++;
+        user.SuccessLoginCount++;
         user.LastLoginTimestamp = DateTime.UtcNow;
         await UserManager.UpdateAsync(user);
 

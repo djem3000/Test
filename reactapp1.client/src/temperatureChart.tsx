@@ -53,8 +53,8 @@ function TemperatureChart() {
         <div>
             <p>
              <label htmlFor="years">Select the year:</label>
-                    <select id="years" onChange={onChangedYear}>
-                        {years.map(y => <option key={y} selected={y===selectedYear}>{ y}</option>) }                  
+                <select id="years" onChange={onChangedYear} defaultValue={selectedYear }>
+                        {years.map(y => <option key={y} >{ y}</option>) }                  
                 </select> 
             </p>
               

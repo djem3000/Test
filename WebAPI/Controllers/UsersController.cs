@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> Users()
         {
-            var data = userManager.Users.Select(x => new UserDTO { Id = x.Id, Name = x.UserName, Logins = x.LoginCount, LastLogin = x.LastLoginTimestamp }).ToList();
+            var data = userManager.Users.Select(x => new UserDTO { Id = x.Id, Name = x.UserName, Logins = x.SuccessLoginCount, LastLogin = x.LastLoginTimestamp }).ToList();
             data.ForEach(async x => { x.Roles = (await userManager.GetRolesAsync(new IdentityUserExt { Id = x.Id })).ToArray(); });
             return Ok(await Task.FromResult(data));
         }
@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
             if (id == "identity")
                 id = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var data = userManager.Users.Where(x=>x.Id == id).Select(x=> new UserDTO { Id = x.Id, Name = x.UserName, Logins = x.LoginCount, LastLogin = x.LastLoginTimestamp }).FirstOrDefault();
+            var data = userManager.Users.Where(x=>x.Id == id).Select(x=> new UserDTO { Id = x.Id, Name = x.UserName, Logins = x.SuccessLoginCount, LastLogin = x.LastLoginTimestamp }).FirstOrDefault();
             if (data == null)
                 return NotFound();
 
@@ -41,14 +41,17 @@ namespace WebAPI.Controllers
         [Route("{id}/image")]
         public ActionResult UserImage(string id)
         {
-            Byte[]? image = userManager.Users.FirstOrDefault(x => x.Id == id)?.Image;
+            var user = userManager.Users.FirstOrDefault(x => x.Id == id);
+            Byte[]? image = user?.Avatar;
+            var mime = user?.AvatarMimeType;
 
             if (image == null) // not found
             {                
                 image = Resources.Embedded.File("Resources.404.jpg");
+                mime = "image/jpeg";
             }
 
-            return File(image, "image/*");
+            return File(image, $"{mime}");
         }
 
 
@@ -70,7 +73,8 @@ namespace WebAPI.Controllers
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userManager.Users.FirstAsync(x => x.Id == userId);
-            user.Image = fileB;
+            user.Avatar = fileB;
+            user.AvatarMimeType = file.ContentType;
             await userManager.UpdateAsync(user);
 
             return Accepted();

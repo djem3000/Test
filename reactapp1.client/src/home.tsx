@@ -42,7 +42,7 @@ function Home() {
                         <td><img src={getAvatarUrl(user.id)} className="avatar" /></td>
                         <td>{user.logins}</td>
                         <td>{user.lastLogin}</td>
-                        {(IdentityService.isInRole("admin") && IdentityService.Identity?.id != user.id) && <td><button onClick={() => handleDelete(user.id)}>Delete</button></td>}
+                        {(IdentityService.isInRole("admin") && IdentityService.Identity?.id != user.id) && <td><button onClick={(e) => { e.stopPropagation(); handleDelete(user.id) }}>Delete</button></td>}
                     </tr>
                 )}
             </tbody>

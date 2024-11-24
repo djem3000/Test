@@ -12,7 +12,7 @@
 
 
 .infoBox {
-    margin-bottom: 20px; padding: 10px; background-color: #fff; border: 1px solid #ccc; border-radius: 5px; text-align: left; 
+    margin-bottom: 20px; padding: 10px; background-color: #fff; border: 1px solid #ccc; border-radius: 5px; text-align: center; 
 }
 
 
@@ -36,6 +36,9 @@
 }
 
 .profile p {
+    text-align: left;
+}
+.roles-container{
     text-align: left;
 }
 

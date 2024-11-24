@@ -24,7 +24,7 @@ namespace WebAPI.Database
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                var admin = new IdentityUserExt { Email = adminEmail, UserName = adminEmail, Image = System.Convert.FromBase64String(Image) };
+                var admin = new IdentityUserExt { Email = adminEmail, UserName = adminEmail, Avatar = System.Convert.FromBase64String(Image), AvatarMimeType="image/jpeg" };
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                 {                    

@@ -55,18 +55,20 @@ function Profile(){
         ? <p>Loading... </p>
         : <div>            
             <img src={selectedImage} alt="Avatar" className="avatar_big" />
-            <p><strong>Update image:</strong>
-                <input
-                    type="file"
-                    name="avatar"
-                    accept=".svg, .png, .jpeg, .jpg"
-                    // Event handler to capture file selection and update the state
-                    onChange={handleFileChange}                
-            />
-            </p>
+            {IdentityService.Identity?.id == id &&
+                <p><strong>Update image:</strong>
+                    <input
+                        type="file"
+                        name="avatar"
+                        accept=".svg, .png, .jpeg, .jpg"
+                        // Event handler to capture file selection and update the state
+                        onChange={handleFileChange}
+                    />
+                </p>
+            }
             <p><strong>Name:</strong> {userProfile.name}</p>
             <p><strong>Last login:</strong> {userProfile.lastLogin}</p>
-            <div><strong>Roles:</strong>
+            <div className="roles-container"><strong>Roles:</strong>
                 {roles.map(role => (
                 <div key={role}>
                     <label> 
