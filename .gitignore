@@ -11,3 +11,4 @@
 /WebAPI/App.db
 /WebAPI/App.db-shm
 /WebAPI/App.db-wal
+/WebAPI/bin/Release/net9.0
