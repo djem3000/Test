@@ -3,7 +3,7 @@ import { ChartDTO, Identity } from "../dto";
 import IdentityService from "./IdentityService";
 
 const api: AxiosInstance = axios.create({
-    baseURL: "http://localhost:5270", 
+    baseURL: "http://localhost:8090", 
     timeout: 1000
 });
 

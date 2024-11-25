@@ -3,7 +3,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, register } from './services/ApiService';
 import IdentityService from './services/IdentityService'
-import './Login.css';
+import './login.css';
 
 function Login() {
     const [email, setEmail] = useState("");

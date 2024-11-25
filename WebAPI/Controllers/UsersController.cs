@@ -35,8 +35,7 @@ namespace WebAPI.Controllers
             data.Roles = (await userManager.GetRolesAsync(new IdentityUserExt { Id = data.Id })).ToArray(); 
             return Ok(data);
         }
-
-        [AllowAnonymous]
+        
         [HttpGet]
         [Route("{id}/image")]
         public ActionResult UserImage(string id)
