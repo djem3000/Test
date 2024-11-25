@@ -13,7 +13,21 @@
  # Запуск
  Я предварительно создал контейнеры и поместил их в свой докер реджистри.
  
- 1) Поместить файл docker-compose.yml в рабочую папку
+ 1) Создать и поместить файл docker-compose.yml в рабочую папку
+ 1a) добавить содержимое в файл
+ ```
+version: "3.8"
+services:  
+   web-api:
+    image: djem3000/test-webapi:latest          
+    ports:
+      - "8090:8080"
+   ui:
+    image: djem3000/test-ui:latest          
+    ports:
+      - "8080:4173"    
+ ```
+ 
  2) Запустить на вашей машине приложение Docker Desktop (https://www.docker.com/)
  3) Открыть CMD или Powershell в рабочей папке
  4) Выполнить разворачивание приложения коммандой:  docker compose up
